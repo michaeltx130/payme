@@ -3,7 +3,7 @@ const signInButton = document.getElementById('signIn');
 const container = document.getElementById('container');
 
 // URL base de tu API
-const apiBaseUrl = 'http://localhost:3001'; // Asegúrate de que esta URL sea correcta
+const apiBaseUrl = 'http://localhost:3001';// Asegúrate de que esta URL sea correcta
 
 // Evento para abrir form de registro
 signUpButton.addEventListener('click', () =>
