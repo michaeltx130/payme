@@ -1,51 +1,49 @@
 //Mostrar menú en todas las pantallas
 function loadSidebar() {
-    fetch('sidebar.html')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al cargar la barra lateral');
-            }
-            return response.text();
-        })
-        .then(html => {
-            document.querySelector('.sidebar-container').innerHTML = html;
+  fetch("sidebar.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al cargar la barra lateral");
+      }
+      return response.text();
+    })
+    .then((html) => {
+      document.querySelector(".sidebar-container").innerHTML = html;
 
-            initializeSidebarNavigation();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+      initializeSidebarNavigation();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
 
-
 function initializeSidebarNavigation() {
-    const currentPath = window.location.pathname.split('/').pop();
-    const buttons = document.querySelectorAll('.btns-menu button');
+  const currentPath = window.location.pathname.split("/").pop();
+  const buttons = document.querySelectorAll(".btns-menu button");
 
-    buttons.forEach(button => {
-        const link = button.getAttribute('data-link');
+  buttons.forEach((button) => {
+    const link = button.getAttribute("data-link");
 
-        if (link === currentPath) {
-            button.classList.add('active');
-        }
-
-        button.addEventListener('click', () => {
-            navigateTo(link);
-        });
-    });
-
-
-    const logo = document.querySelector('.sidebar h1');
-    if (logo) {
-        const dashboardLink = logo.getAttribute('data-link');
-        logo.addEventListener('click', () => {
-            navigateTo(dashboardLink);
-        });
+    if (link === currentPath) {
+      button.classList.add("active");
     }
+
+    button.addEventListener("click", () => {
+      navigateTo(link);
+    });
+  });
+
+  const logo = document.querySelector(".sidebar-logo");
+  if (logo) {
+    const dashboardLink = logo.getAttribute("data-link");
+    logo.addEventListener("click", () => {
+      navigateTo(dashboardLink);
+    });
+  }
 }
 
 function navigateTo(url) {
-    window.location.href = url;
+  window.location.href = url;
 }
 
-document.addEventListener('DOMContentLoaded', loadSidebar);
+document.addEventListener("DOMContentLoaded", loadSidebar);

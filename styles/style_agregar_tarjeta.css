@@ -4,7 +4,8 @@ html {
     background: #E8EBF2;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
 }
 
 .add-card {
@@ -13,7 +14,7 @@ html {
 }
 
 .container {
-    margin-left: 250px;
+    margin-left: 300px;
     padding: 30px;
     width: calc(100% - 250px);
     transition: all 0.3s ease;
@@ -23,10 +24,10 @@ html {
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
-    padding: 30px;
-    max-width: 600px;
+    padding: 24px;
+    width: 100%;
+    max-width: 800px;
     margin: 0 auto;
-    margin-bottom: 30px;
 }
 
 form {
@@ -50,7 +51,7 @@ input {
 
 button[type="submit"] {
     padding: 12px;
-    background-color: #560090;
+    background: linear-gradient(90deg, #340078 0%, #500AA1 35%, #6A00FF 100%);
     color: white;
     border: none;
     border-radius: 8px;
@@ -59,7 +60,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #7700C6;
+    background: linear-gradient(90deg, #340078dc 0%, #500aa1dd 35%, #6a00ffdd 100%);
 }
 
 button[type="button"] {
@@ -73,7 +74,9 @@ button[type="button"] {
 }
 
 button[type="button"]:hover {
-    background-color: #f3e6ff;
+    background-color: #f8f8f8;
+    border-color: #560090;
+    color: #560090;
 }
 
 @media (max-width: 768px) {

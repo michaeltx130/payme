@@ -14,38 +14,39 @@ h4 {
 
 .dashboard {
     display: flex;
-    height: 100%;
+    width: 100%;
+    min-height: 100vh;
 }
 
 .container {
-    margin-left: 250px;
+    margin-left: 300px;
     padding: 30px;
-    width: calc(100% - 250px);
+    width: 100%;
+    max-width: calc(100% - 300px);
+    box-sizing: border-box;
     transition: all 0.3s ease;
 }
 
-
 .card-container {
     display: flex;
-    gap: 60px;
-    justify-content: center;
     flex-wrap: wrap;
+    gap: 40px;
     padding: 20px;
+    justify-content: center;
 }
 
 .card {
-    background-color: white;
+    background-color: #ffffff;
     border-radius: 20px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
     padding: 15px;
-    min-width: 350px;
-    max-width: 400px;
-    flex-grow: 1;
+    flex: 1 1 350px;
+    max-width: 420px;
     position: relative;
+    box-sizing: border-box;
 }
 
 .card select {
-    margin-top: 70px;
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -71,7 +72,7 @@ h4 {
     position: absolute;
     top: 15px;
     right: 15px;
-    background-color: #560090;
+    background: linear-gradient(90deg, #340078 0%, #500AA1 35%, #6A00FF 100%);
     color: #fff;
     border: none;
     border-radius: 50%;
@@ -82,7 +83,19 @@ h4 {
 }
 
 .add-button:hover {
-    background-color: #7700C6;
+    background: linear-gradient(90deg, #340078dc 0%, #500aa1dd 35%, #6a00ffdd 100%);
+}
+
+.svg-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.svg-container img {
+    width: 128px;
+    height: 128px;
+    object-fit: contain;
 }
 
 .container-overlay {
@@ -109,12 +122,23 @@ h4 {
     max-width: 90%;
     display: none;
     z-index: 1000;
+    box-sizing: border-box;
+}
+
+.floating-window h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
 }
 
 .floating-window form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
+}
+
+.floating-window label {
+    font-size: 14px;
+    margin-bottom: 4px;
 }
 
 .floating-window select,
@@ -133,7 +157,7 @@ h4 {
     border: none;
     border-radius: 4px;
     padding: 10px 20px;
-    margin-top: 15px;
+    margin-top: 8px;
     cursor: pointer;
 }
 
@@ -145,54 +169,34 @@ h4 {
     background-color: #fff;
     border: 1px solid #000000;
     color: #000000;
-    border-radius: 4px;
-    padding: 10px 20px;
-    cursor: pointer;
 }
 
 .floating-window button[type="button"]:hover {
-    background-color: #f3e6ff;
+    background-color: #f8f8f8;
+    border-color: #560090;
+    color: #560090;
 }
 
 @media (max-width: 768px) {
     .container {
         margin-left: 70px;
-        width: calc(100% - 70px);
-    }
-
-    .card-container {
-        gap: 30px;
+        max-width: calc(100% - 70px);
     }
 
     .card {
-        min-width: 300px;
+        flex: 1 1 300px;
     }
 
     .floating-window {
-
         padding: 20px;
-    }
-
-    .floating-window form {
-        gap: 12px;
-    }
-
-    .floating-window select,
-    .floating-window input {
-        padding: 8px;
-        font-size: 13px;
-    }
-
-    .floating-window button {
-        padding: 12px 18px;
-        font-size: 14px;
     }
 }
 
 @media (max-width: 480px) {
     .container {
         margin-left: 0;
-        width: 100%;
+        max-width: 100%;
+        padding: 15px;
     }
 
     .card-container {
@@ -201,7 +205,7 @@ h4 {
     }
 
     .card {
-        min-width: 100%;
+        flex: 1 1 100%;
         max-width: 100%;
     }
 
@@ -211,22 +215,12 @@ h4 {
 
     .floating-window {
         width: 90%;
-        max-width: 100%;
         padding: 15px;
     }
 
-    .floating-window form {
-        gap: 10px;
-    }
-
-    .floating-window select,
-    .floating-window input {
-        padding: 6px;
+    .floating-window input,
+    .floating-window select {
+        padding: 8px;
         font-size: 12px;
-    }
-
-    .floating-window button {
-        padding: 10px 15px;
-        font-size: 13px;
     }
 }

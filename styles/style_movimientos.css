@@ -4,7 +4,8 @@ body {
     background: #E8EBF2;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
 }
 
 .movements {
@@ -13,7 +14,7 @@ body {
 }
 
 .container {
-    margin-left: 250px;
+    margin-left: 300px;
     padding: 30px;
     width: calc(100% - 250px);
     transition: all 0.3s ease;
@@ -25,9 +26,8 @@ body {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
     padding: 24px;
     width: 100%;
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
-    margin-bottom: 60px;
 }
 
 .filters {
@@ -58,12 +58,19 @@ body {
 .transactions-table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 14px;
 }
 
 .transactions-table th,
 .transactions-table td {
-    text-align: left;
-    padding: 12px;
+    padding: 10px 12px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.transactions-table th {
+    background-color: #f5f5f5;
+    font-weight: 600;
 }
 
 .empty-state {
@@ -82,6 +89,10 @@ body {
     .container {
         margin-left: 70px;
         width: calc(100% - 70px);
+    }
+
+    .movements-table {
+        max-width: 95%;
     }
 }
 
