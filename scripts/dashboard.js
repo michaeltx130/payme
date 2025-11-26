@@ -286,6 +286,78 @@ async function updateExpenseSummary() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    const form = document.getElementById("addCardForm");
+    if (!form) return;
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const cardName = document.getElementById('cardName').value;
+        const cardNumber = document.getElementById('cardNumber').value;
+        const expirationDate = document.getElementById('expirationDate').value;
+        const securityCode = document.getElementById('cvv').value;
+
+        let errors = [];
+
+        if (!cardName.trim()) errors.push("El nombre del titular es obligatorio");
+        if (!/^\d{4}\s?\d{4}\s?\d{4}\s?\d{4}$/.test(cardNumber))
+            errors.push("Número de tarjeta inválido");
+        if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expirationDate))
+            errors.push("Fecha inválida, use MM/AA");
+        if (!/^\d{3,4}$/.test(securityCode))
+            errors.push("CVV inválido");
+
+        if (errors.length > 0) {
+            alert(errors.join("\n"));
+            return;
+        }
+
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+            alert("No hay sesión activa");
+            window.location.href = "login.html";
+            return;
+        }
+
+        const cleanedCardNumber = cardNumber.replace(/\s/g, "");
+
+        const cardData = {
+            card_holder: cardName,
+            card_number: cleanedCardNumber,
+            expiration_date: expirationDate,
+            security_code: securityCode
+        };
+
+        try {
+            const response = await fetch("http://localhost:3001/cards/addCards", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(cardData)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                alert(result.message || "Error al agregar tarjeta");
+                return;
+            }
+
+            alert("Tarjeta agregada exitosamente");
+            form.reset();
+
+        } catch (err) {
+            alert("Error del servidor: " + err.message);
+        }
+    });
+
+});
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
     updateUserGreeting();
