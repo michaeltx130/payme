@@ -19,26 +19,51 @@ async function makeTransfer(recipient_email, amount, message) {
         });
 
         if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`Network response was not ok: ${response.statusText}, ${errorText}`);
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Error desconocido en el servidor');
         }
 
         const result = await response.json();
-        console.log('Transferencia realizada:', result);
         alert('Transferencia realizada exitosamente');
     } catch (error) {
         console.error('Error al realizar transferencia:', error);
-        alert(`Error en el servidor: ${error.message}`);
+        alert(error.message);
     }
 }
+
+
 
 // Manejar el evento de envío del formulario de transferencia
 document.getElementById('transferForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const recipientEmail = document.getElementById('recipientEmail').value;
-    const amount = parseFloat(document.getElementById('amount').value);
+    const recipientEmail = document.getElementById('recipientEmail').value.trim();
+    const amountValue = document.getElementById('amount').value.trim();
+    const amount = parseFloat(amountValue);
     const message = document.getElementById('message').value;
+
+    // VALIDACIONES FRONT
+    if (!recipientEmail) {
+        alert("Debe ingresar un correo del destinatario.");
+        return;
+    }
+
+    if (!amountValue || isNaN(amount)) {
+        alert("Debe ingresar un monto válido.");
+        return;
+    }
+
+    if (amount <= 0) {
+        alert("El monto debe ser mayor que cero.");
+        return;
+    }
+
+    // Aviso si el monto es grande
+    if (amount > 5000) {
+        if (!confirm(`¿Seguro que deseas transferir $${amount}?`)) {
+            return;
+        }
+    }
 
     makeTransfer(recipientEmail, amount, message).then(() => {
         document.getElementById('recipientEmail').value = '';
@@ -46,3 +71,4 @@ document.getElementById('transferForm').addEventListener('submit', function(even
         document.getElementById('message').value = '';
     });
 });
+
